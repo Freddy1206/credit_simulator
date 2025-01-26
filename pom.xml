@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>freddy.michael.BCA</groupId>
+    <artifactId>credit_simulator</artifactId>
+    <version>1.0.0</version>
+    <name>credit-simulator</name>
+    <description>Demo project for credit simulator app</description>
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <okhttp.version>4.12.0</okhttp.version>
+    </properties>
+
+    <modules>
+        <module>app/application</module>
+        <module>app/biz/service-impl</module>
+        <module>app/biz/shared</module>
+        <module>app/core/model</module>
+        <module>app/core/service</module>
+        <module>app/common/service/integration</module>
+        <module>app/common/util</module>
+        <module>app/common/dal</module>
+        <module>app/test</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Module dependencies -->
+            <dependency>
+                <groupId>freddy.michael.BCA</groupId>
+                <artifactId>credit-simulator-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>freddy.michael.BCA</groupId>
+                <artifactId>credit-simulator-biz-service-impl</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>freddy.michael.BCA</groupId>
+                <artifactId>credit-simulator-biz-shared</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>freddy.michael.BCA</groupId>
+                <artifactId>credit-simulator-core-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>freddy.michael.BCA</groupId>
+                <artifactId>credit-simulator-core-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>freddy.michael.BCA</groupId>
+                <artifactId>credit-simulator-common-util</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>freddy.michael.BCA</groupId>
+                <artifactId>credit-simulator-common-service-integration</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>freddy.michael.BCA</groupId>
+                <artifactId>credit-simulator-common-dal</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>freddy.michael.BCA</groupId>
+                <artifactId>credit-simulator-test</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!--/ Module dependencies -->
+
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>20230227</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>5.2.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>5.2.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>2.20.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>2.20.0</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <mainClass>id.bca.credit.simulator.application.CreditSimulatorApplication</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
