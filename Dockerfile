@@ -1,14 +1,26 @@
-# Use a base image for Java 8
+# Gunakan base image untuk Maven
+FROM maven:3.8.5-openjdk-8 AS builder
+
+# Set working directory
+WORKDIR /build
+
+# Copy seluruh proyek ke dalam container
+COPY . .
+
+# Jalankan build Maven
+RUN mvn clean package
+
+# Gunakan base image untuk menjalankan aplikasi
 FROM openjdk:8-jre-slim
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy the application JAR file
-COPY app/application/target/credit-simulator-application-1.0.0-jar-with-dependencies.jar /app/credit_simulator.jar
+# Salin file JAR hasil build dari tahap sebelumnya
+COPY --from=builder /build/target/credit-simulator-application-1.0.0-jar-with-dependencies.jar /app/credit_simulator.jar
 
-# Expose the application port
+# Expose port
 EXPOSE 8080
 
-# Run the application
+# Jalankan aplikasi
 ENTRYPOINT ["java", "-jar", "/app/credit_simulator.jar"]
